@@ -1,41 +1,65 @@
 import React from 'react'
 import s from './Form.module.css'
-class Form extends React.Component{
+
+class Form extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
-      email:"admin@admin.com",
-      inputAdmin:""
+    this.state = {
+      email: "admin@admin.com",
+      inputValue: "",
+      error: false
     }
-    this.handleSubmit=this.handleSubmit.bind(this);
-    this.handleChange=this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e){
+  handleChange(e) {
+    const inputValue = e.target.value
     this.setState({
-      inputAdmin: e.target.value
+      inputValue: inputValue
     })
+    if (inputValue === this.state.email) {
+      this.setState({
+        error: false
+      })
+    } else {
+      this.setState({
+        error: true
+      })
+    }
   }
 
-  handleSubmit(e){
+  handleSubmit(e) {
     e.preventDefault();
-    console.log('submit success');
+    if (this.state.error === false) {
+      console.log('submit success');
+      this.setState({
+        inputValue: ''
+      })
+    } else {
+      console.log('NOT submit');
+    }
   }
-
 
 
   render() {
 
-    const stLine = {
-      border: this.state.inputAdmin !== this.state.email ? "2px solid red" : ""
+    let stInput = s.email;
+    let pTag = "";
+    if (this.state.error) {
+      stInput = s.emailError
+      pTag = <p>Email is not admin@admin.com</p>
+    } else {
+      stInput = s.email
+      pTag = ""
     }
-
-    return(
+    return (
       <div>
-        <form className={s.form} onSubmit={this.handleSubmit}>
-          <input style={stLine}  className={s.email} onChange={this.handleChange} type="email"/>
+        <form onSubmit={this.handleSubmit} className={s.form}>
+          <input className={stInput} value={this.state.inputValue} onChange={this.handleChange} type="email"/>
+          {pTag}
           <div className={s.btn}>
-            <button >Submit</button>
+            <button type="submit">Submit</button>
           </div>
         </form>
       </div>
