@@ -35,17 +35,11 @@ class Form extends React.Component {
       console.log('submit success');
       this.setState({
         inputValue: ''
-       // error: true
-      //  ТУТ ВОПРОС КАК СКИНУТЬ ФОРМУ,
-        //  ТОИСТЬ КОГДА ЧЕЛ НАЖАЛ НА САБМІТ І ОНО ОТПРАВИЛО (ПОЛЕ ЧИСТИТСЯ) НО МОЖНА ОПЯТЬ НАЖАТЬ НА САБМИТ І ОНО ОПЯТЬ ПРОЙДЕТ ПРОВЕРКУ
-        // ЕСЛИ НАПИСАТЬ СТ.38 ТО ПОСЛЕ ОТПРАВКИ ПОЛЕ СРАЗУ КРАСНОЕ
-
       })
     } else {
       console.log('NOT submit');
     }
   }
-
 
   render() {
 
